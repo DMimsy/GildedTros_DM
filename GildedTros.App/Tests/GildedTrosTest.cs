@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Xunit;
+using GildedTros.App.Models;
 
 namespace GildedTros.App.Tests
 {
@@ -9,7 +10,7 @@ namespace GildedTros.App.Tests
         public void foo()
         {
             IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-            GildedTros app = new GildedTros(Items);
+            GildedTrosClient app = new GildedTrosClient(Items);
             app.UpdateQuality();
             Assert.Equal("fixme", Items[0].Name);
         }
