@@ -7,12 +7,26 @@ namespace GildedTros.App.Tests
     public class GildedTrosTest
     {
         [Fact]
-        public void foo()
+        public void UpdateQualityTest()
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-            GildedTrosClient app = new GildedTrosClient(Items);
+            GildedTrosClient app = new GildedTrosClient(false);
+            app.AddItem("common item", 20, 15);
+
             app.UpdateQuality();
-            Assert.Equal("fixme", Items[0].Name);
+
+            Assert.True(app.Items[0].Quality == 14);
         }
+
+        [Fact]
+        public void AddItemTest()
+        {
+            GildedTrosClient app = new GildedTrosClient(false);
+            app.AddItem("common item", 20, 15);
+
+            Assert.True(app.Items[0].Name == "common item");
+        
+        }
+
+
     }
 }
