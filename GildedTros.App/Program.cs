@@ -9,7 +9,7 @@ namespace GildedTros.App
     {
         public static void Main(string[] args)
         {
-            //TOOD: userinterface for console interaction
+            //TODO: userinterface for console interaction
             Console.WriteLine("OMGHAI!");
 
             var app = new GildedTrosClient(true);

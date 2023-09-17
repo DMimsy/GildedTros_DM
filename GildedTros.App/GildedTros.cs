@@ -5,10 +5,20 @@ using GildedTros.App.Models;
 
 namespace GildedTros.App
 {
+    interface IGildeTrosClietn
+    {
+        public void AddItem(string name, int sellin, int quality);
+        public void UpdateQuality();
+
+    }
     public class GildedTrosClient
     {
         internal IList<GildedTrosItem> Items = new List<GildedTrosItem>(); 
         
+        /// <summary>
+        /// instantiate with parameter shouldInitialize set to true for basic list of items
+        /// </summary>
+        /// <param name="shouldInitialize"></param>
         public GildedTrosClient(bool shouldInitialize) 
         {
             if(shouldInitialize)
@@ -39,6 +49,13 @@ namespace GildedTros.App
 
         }
 
+        //TODO: alternatief zoeken ivm SRP?
+        /// <summary>
+        /// Add item to Items list
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="sellin"></param>
+        /// <param name="quality"></param>
         public void AddItem(string name, int sellin, int quality)
         { 
             var item = GildedTrosFactory.GetGildedTrosItem(name);
@@ -63,6 +80,9 @@ namespace GildedTros.App
             Items.Add(item);
         }
 
+        /// <summary>
+        /// update qualitity foreach item in Items list
+        /// </summary>
         public void UpdateQuality()
         {
             this.Items.ForEach(item => item.UpdateQuality());
