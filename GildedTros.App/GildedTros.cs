@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ApprovalUtilities.Utilities;
 using GildedTros.App.Factory;
 using GildedTros.App.Models;
 
@@ -6,7 +7,7 @@ namespace GildedTros.App
 {
     public class GildedTrosClient
     {
-        internal IList<Item> Items = new List<Item>(); 
+        internal IList<GildedTrosItem> Items = new List<GildedTrosItem>(); 
         
         public GildedTrosClient() 
         {
@@ -14,7 +15,7 @@ namespace GildedTros.App
         }
         public GildedTrosClient(IList<Item> items)
         {
-            this.Items = items;
+            //this.Items = items;
 
         }
 
@@ -42,87 +43,105 @@ namespace GildedTros.App
             var item = GildedTrosFactory.GetGildeTrosItem(name);
             item.Name = name;
             item.SellIn = sellin;
-            item.Quality = quality;
+
+            if (item is GildedTrosLegendaryItem)
+            {
+                item.Quality = 80;
+            }
+            else
+            {
+                //TODO: validate quality
+                item.Quality = quality;
+            }
+           
+
+            
             Items.Add(item);
         }
+
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
-            {
-                if (Items[i].Name != "Good Wine"
-                    && Items[i].Name != "Backstage passes for Re:factor"
-                    && Items[i].Name != "Backstage passes for HAXX")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != "B-DAWG Keychain")
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-
-                        if (Items[i].Name == "Backstage passes for Re:factor"
-                        || Items[i].Name == "Backstage passes for HAXX")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (Items[i].Name != "B-DAWG Keychain")
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
-
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != "Good Wine")
-                    {
-                        if (Items[i].Name != "Backstage passes for Re:factor"
-                            && Items[i].Name != "Backstage passes for HAXX")
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "B-DAWG Keychain")
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
-                    }
-                }
-            }
+            this.Items.ForEach(item => item.UpdateQuality());
         }
+
+        //public void UpdateQuality()
+        //{
+        //    for (var i = 0; i < Items.Count; i++)
+        //    {
+        //        if (Items[i].Name != "Good Wine"
+        //            && Items[i].Name != "Backstage passes for Re:factor"
+        //            && Items[i].Name != "Backstage passes for HAXX")
+        //        {
+        //            if (Items[i].Quality > 0)
+        //            {
+        //                if (Items[i].Name != "B-DAWG Keychain")
+        //                {
+        //                    Items[i].Quality = Items[i].Quality - 1;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (Items[i].Quality < 50)
+        //            {
+        //                Items[i].Quality = Items[i].Quality + 1;
+
+        //                if (Items[i].Name == "Backstage passes for Re:factor"
+        //                || Items[i].Name == "Backstage passes for HAXX")
+        //                {
+        //                    if (Items[i].SellIn < 11)
+        //                    {
+        //                        if (Items[i].Quality < 50)
+        //                        {
+        //                            Items[i].Quality = Items[i].Quality + 1;
+        //                        }
+        //                    }
+
+        //                    if (Items[i].SellIn < 6)
+        //                    {
+        //                        if (Items[i].Quality < 50)
+        //                        {
+        //                            Items[i].Quality = Items[i].Quality + 1;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //        if (Items[i].Name != "B-DAWG Keychain")
+        //        {
+        //            Items[i].SellIn = Items[i].SellIn - 1;
+        //        }
+
+        //        if (Items[i].SellIn < 0)
+        //        {
+        //            if (Items[i].Name != "Good Wine")
+        //            {
+        //                if (Items[i].Name != "Backstage passes for Re:factor"
+        //                    && Items[i].Name != "Backstage passes for HAXX")
+        //                {
+        //                    if (Items[i].Quality > 0)
+        //                    {
+        //                        if (Items[i].Name != "B-DAWG Keychain")
+        //                        {
+        //                            Items[i].Quality = Items[i].Quality - 1;
+        //                        }
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    Items[i].Quality = Items[i].Quality - Items[i].Quality;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                if (Items[i].Quality < 50)
+        //                {
+        //                    Items[i].Quality = Items[i].Quality + 1;
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
