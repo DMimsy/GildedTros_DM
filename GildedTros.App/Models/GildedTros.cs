@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 
-namespace GildedTros.App
+namespace GildedTros.App.Models
 {
-    public class GildedTros
+    public class GildedTrosClient
     {
         IList<Item> Items;
-        public GildedTros(IList<Item> items)
+        public GildedTrosClient(IList<Item> items)
         {
-            this.Items = items;
+            Items = items;
         }
 
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Good Wine" 
+                if (Items[i].Name != "Good Wine"
                     && Items[i].Name != "Backstage passes for Re:factor"
                     && Items[i].Name != "Backstage passes for HAXX")
                 {

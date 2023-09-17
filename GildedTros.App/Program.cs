@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ApprovalUtilities.Utilities;
+using System;
 using System.Collections.Generic;
+using GildedTros.App.Models;
 
 namespace GildedTros.App
 {
@@ -24,17 +26,17 @@ namespace GildedTros.App
                 new Item {Name = "Ugly Variable Names", SellIn = 3, Quality = 6}
             };
 
-            var app = new GildedTros(Items);
+            var app = new GildedTrosClient(Items);
 
 
             for (var i = 0; i < 31; i++)
             {
                 Console.WriteLine("-------- day " + i + " --------");
                 Console.WriteLine("name, sellIn, quality");
-                for (var j = 0; j < Items.Count; j++)
+                Items.ForEach(item =>
                 {
-                    System.Console.WriteLine(Items[j].Name + ", " + Items[j].SellIn + ", " + Items[j].Quality);
-                }
+                    Console.WriteLine($"{item.Name}, {item.SellIn}, {item.Quality}");
+                });
                 Console.WriteLine("");
                 app.UpdateQuality();
             }
