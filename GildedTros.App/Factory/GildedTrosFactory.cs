@@ -10,7 +10,7 @@ namespace GildedTros.App.Factory
 {
     internal class GildedTrosFactory
     {
-        public static GildedTrosItem GetGildeTrosItem(string name)
+        public static GildedTrosItem GetGildedTrosItem(string name)
         {
 
             switch (name.ToLower())

@@ -41,7 +41,7 @@ namespace GildedTros.App
 
         public void AddItem(string name, int sellin, int quality)
         { 
-            var item = GildedTrosFactory.GetGildeTrosItem(name);
+            var item = GildedTrosFactory.GetGildedTrosItem(name);
             
             item.Name = name;
             item.SellIn = sellin;

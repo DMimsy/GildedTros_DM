@@ -6,6 +6,7 @@ namespace GildedTros.App.Tests
 {
     public class GildedTrosTest
     {
+        //TODO: tests uitbreiden met verschillende parameters
         [Fact]
         public void UpdateQualityTest()
         {
@@ -26,6 +27,7 @@ namespace GildedTros.App.Tests
             Assert.True(app.Items[0].Name == "common item");
         
         }
+        
 
 
     }
