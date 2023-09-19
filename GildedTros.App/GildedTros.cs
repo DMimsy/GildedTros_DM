@@ -5,13 +5,13 @@ using GildedTros.App.Models;
 
 namespace GildedTros.App
 {
-    interface IGildeTrosClietn
+    interface IGildedTrosClient
     {
         public void AddItem(string name, int sellin, int quality);
         public void UpdateQuality();
 
     }
-    public class GildedTrosClient
+    public class GildedTrosClient : IGildedTrosClient
     {
         internal IList<GildedTrosItem> Items = new List<GildedTrosItem>(); 
         
@@ -24,11 +24,7 @@ namespace GildedTros.App
             if(shouldInitialize)
                 this.Initialize();
         }
-        public GildedTrosClient(IList<Item> items)
-        {
-            //this.Items = items;
-
-        }
+       
 
         private void Initialize()
         {
